@@ -195,7 +195,7 @@ switch ($color) {
     default:
         # code...
         echo 'not defined';
-        break;
+        break;    // we can remove it in default case only .....
 }
 
 
