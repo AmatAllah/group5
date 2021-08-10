@@ -321,13 +321,13 @@
 // }
 
 
-  $students = array(
+//   $students = array(
 
-      array("20130","ahmed",3.4),
-      array("20131","Root",3.8),
-      array("20132","Test"),
-      array("20133","omar",2.8,1,'test')
-  );
+//       array("20130","ahmed",3.4),
+//       array("20131","Root",3.8),
+//       array("20132","Test"),
+//       array("20133","omar",2.8,1,'test')
+//   );
 
 
 //    echo $students[2][0];
@@ -346,17 +346,21 @@
 
 
 
-    for ($row=0; $row < count($students) ; $row++) { 
-        # code...
-        for ($col=0; $col < count($students[$row]); $col++) { 
-            # code...
-            echo $students[$row][$col].' ';
-        }
-        echo '<br>';
-    }
-
+    // for ($row=0; $row < count($students) ; $row++) { 
+    //     # code...
+    //     for ($col=0; $col < count($students[$row]); $col++) { 
+    //         # code...
+    //         echo $students[$row][$col].' ';
+    //     }
+    //     echo '<br>';
+    // }
 
 
 ?>
+
+
+    
+
+
 
 
