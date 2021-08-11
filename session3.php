@@ -1,5 +1,8 @@
 <?php 
 
+ session_start();
+
+
 // task  ... 
 
 
@@ -128,20 +131,27 @@ function CleanInputs($input){
       $name  = CleanInputs($_POST['name']);
       $email = CleanInputs($_POST['email']);
       $password = $_POST['password'] ;
+     // $gender   = $_POST['gender'];
+      $linkedin = $_POST['linked_in'];
 
 
-      
       if(empty($name)){
 
         $errors['Name'] = " Field Required";
 
+      }elseif(!preg_match("/^[a-zA-Z-']*$/",$name)){
+
+        $errors['Name'] = "Invalid String";
       }
+
 
 
       if(empty($email)){
 
         $errors['Email'] = " Field Required";
 
+      }elseif(!filter_var($email,FILTER_VALIDATE_EMAIL)){
+         $errors['Email'] = "Invalid Email";
       }
 
 
@@ -149,9 +159,27 @@ function CleanInputs($input){
 
         $errors['Password'] = " Field Required";
 
+      }elseif(strlen($password < 6)){
+
+        $errors['Password'] = "Invalid Length";
       }
 
 
+      if(empty($linkedin)){
+
+        $errors['linkedin'] = "Field Required";
+
+      }elseif(!filter_var($linkedin,FILTER_VALIDATE_URL)){
+         
+        $errors['linkedin'] = "Invalid url";
+      }
+
+
+
+      if(!isset($_POST['gender'])){
+
+        $errors['gender'] = "Field required";
+      }
 
 
         if(count($errors) > 0){
@@ -162,12 +190,13 @@ function CleanInputs($input){
             }
         }else{
 
-            echo $name;
+        //echo  sha1($password); // md5
+        $_SESSION['userData'] = [$name,$email,sha1($password),$_POST['gender'],$linkedin];
+
         }
 
 
    }
-
 
 
     // $age = 'test20';
@@ -195,9 +224,9 @@ function CleanInputs($input){
 
 
 
-$ip = "127.0.0.1";
+// $ip = "127.0.0.1";
 
-    var_dump(filter_var($ip,FILTER_VALIDATE_IP));
+//     var_dump(filter_var($ip,FILTER_VALIDATE_IP));
 
 ?>
 
@@ -242,7 +271,24 @@ $ip = "127.0.0.1";
   </div>
  
 
+
+
+  <div class="form-group">
+    <label for="exampleInputPassword1">LinkedIn</label>
+    <input type="text"  name="linked_in"  class="form-control" id="exampleInputPassword1" placeholder="profile url">
+  </div>
  
+
+
+  <div class="form-group">
+
+  <input type="radio"  name="gender"  value="male"> 
+  <label for="exampleInputPassword1">Male</label>
+
+  <input type="radio"  name="gender"  value="female"> 
+  <label for="exampleInputPassword1">Female</label>
+     </div>
+
 
   
   <button type="submit" class="btn btn-primary">Submit</button>
