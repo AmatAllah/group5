@@ -1,6 +1,9 @@
 <?php 
 
     // $file = fopen("students.txt","a")  or die("unable to open file");
+     // fwrite($file,$txt);
+         // fclose($file);
+
 
     // $txt = "js course\n";
 

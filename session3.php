@@ -139,7 +139,7 @@ function CleanInputs($input){
 
         $errors['Name'] = " Field Required";
 
-      }elseif(!preg_match("/^[a-zA-Z-']*$/",$name)){
+      }elseif(!preg_match("/^[a-zA-Z\s*']+$/",$name)){
 
         $errors['Name'] = "Invalid String";
       }
@@ -190,8 +190,21 @@ function CleanInputs($input){
             }
         }else{
 
-        //echo  sha1($password); // md5
-        $_SESSION['userData'] = [$name,$email,sha1($password),$_POST['gender'],$linkedin];
+       $password =   sha1($password); // md5
+        //$_SESSION['userData'] = [$name,$email,sha1($password),$_POST['gender'],$linkedin];
+
+ 
+       $txt = $name.' '.$email.' '.$_POST['gender'].' '.$linkedin;
+
+       $txt .= "\n"; 
+
+       $file = fopen("students.txt","a") or die("unable to open file");
+
+       fwrite($file,$txt);
+
+       fclose($file);
+
+
 
         }
 

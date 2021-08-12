@@ -1,6 +1,2 @@
-php course
-c# course
-js course
-c++ course
-js course
-c++ course
+root root@root.com              21
+x       x@x.com        age=23                           test message 
