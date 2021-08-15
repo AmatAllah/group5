@@ -126,9 +126,6 @@
 
 
 
-//    name    password   email  
-//    ahmed   123         a@a.com
-//     omar   555         o@o.com
 
 
 
