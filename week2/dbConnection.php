@@ -1,5 +1,6 @@
 <?php 
 
+
 $server = "localhost";
 $dbName = "group5";
 $dbUser = "root";

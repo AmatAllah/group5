@@ -1,11 +1,13 @@
 <?php 
+require 'checkLogin.php';
 
 require 'dbConnection.php';
 
 $sql = "select * from users";
 
-$op = mysqli_query($con,$sql);
+// $sql = "select * from users where id = ".$_SESSION['user']['id'];
 
+$op = mysqli_query($con,$sql);
 
 
 ?>
@@ -51,7 +53,17 @@ $op = mysqli_query($con,$sql);
  
 
         <div class="page-header">
-            <h1>Read Users </h1> <br>
+            <h1>Read Users </h1> 
+            <br>
+
+         <?php 
+         
+           echo   'Welcome '.$_SESSION['user']['name'];
+         
+         ?>
+
+  
+     <a href="logout.php">LogOut</a>
 
             
 
@@ -67,7 +79,7 @@ $op = mysqli_query($con,$sql);
                 <th>ID</th>
                 <th>Name</th>
                 <th>Email</th>
-                   <!-- <th>Email</th> -->
+                <th>action</th> 
            
             </tr>
 
@@ -84,10 +96,10 @@ $op = mysqli_query($con,$sql);
                  <td><?php echo $data['email'];?></td>
 
 
-                 <!-- <td>
-                 <a href='' class='btn btn-danger m-r-1em'>Delete</a>
-                 <a href='' class='btn btn-primary m-r-1em'>Edit</a>       
-                </td> -->
+                 <td>
+                 <a href='delete.php?id=<?php echo $data['id'];?>' class='btn btn-danger m-r-1em'>Delete</a>
+                 <a href='edit.php?id=<?php echo $data['id'];?>' class='btn btn-primary m-r-1em'>Edit</a>       
+                </td> 
 
            </tr> 
 
@@ -132,6 +144,25 @@ $op = mysqli_query($con,$sql);
       FORM [TITLE,CONTENT,IMAGE] [CREATE]
 
       DISPLAY [TITLE,CONTENT,IMAGE ]  // TABLE 
+
+
+
+      delete , edit ..... []
+
+
+
+
+
+    TASK 
+
+
+    users Table (name,email,password)
+
+    read users & change password .. .
+
+
+
+
 
 
 
