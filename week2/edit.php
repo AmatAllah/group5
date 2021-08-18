@@ -43,6 +43,8 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
 
   $name  = CleanInputs($_POST['name']);
   $email = CleanInputs($_POST['email']);
+  $dep_id   =  filter_var($_POST['dep_id'],FILTER_SANITIZE_NUMBER_INT);
+
 
 
 
@@ -68,6 +70,13 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
 
 
 
+  if(!filter_var($dep_id,FILTER_VALIDATE_INT)){
+
+    $errors['dep_id'] = "Invalid Department id ";
+
+  }
+
+
 
     if(count($errors) > 0){
 
@@ -79,7 +88,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
 
 
 
-     $sql = "update users set name='$name' , email='$email'  where id = $id";
+     $sql = "update users set name='$name' , email='$email' , dep_id = $dep_id    where id = $id";
 
      $op =  mysqli_query($con,$sql);
 
@@ -105,6 +114,12 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
 $sql = "select * from users where id = $id";
 $op = mysqli_query($con,$sql);
 $data = mysqli_fetch_assoc($op);
+
+
+
+  # Fetch departments 
+  $dep_sql = "select * from departments";
+  $dep_op  = mysqli_query($con,$dep_sql); 
 
 mysqli_close($con);
 
@@ -152,6 +167,24 @@ mysqli_close($con);
 <label for="exampleInputPassword1">New Password</label>
 <input type="password"  name="password"  class="form-control" id="exampleInputPassword1" placeholder="Password">
 </div> -->
+
+
+
+<div class="form-group">
+<label for="exampleInputPassword1">Department</label>
+<select name="dep_id" class="form-control" >
+  <?php 
+   
+      while($rows = mysqli_fetch_assoc($dep_op)){
+  ?>
+
+  <option value="<?php echo $rows['id'];?>"   <?php  if($rows['id'] == $data['dep_id']){  echo 'selected';  }    ?>   >  <?php echo $rows['title'];?> </option>
+
+  <?php } ?>
+
+</select>  
+</div>
+
 
 
 <button type="submit" class="btn btn-primary">Update</button>

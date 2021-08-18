@@ -3,7 +3,7 @@ require 'checkLogin.php';
 
 require 'dbConnection.php';
 
-$sql = "select * from users";
+$sql = "select users.* , departments.title as dep_title from users inner join departments on users.dep_id = departments.id   ";
 
 // $sql = "select * from users where id = ".$_SESSION['user']['id'];
 
@@ -79,6 +79,7 @@ $op = mysqli_query($con,$sql);
                 <th>ID</th>
                 <th>Name</th>
                 <th>Email</th>
+                <th>department</th>
                 <th>action</th> 
            
             </tr>
@@ -94,6 +95,7 @@ $op = mysqli_query($con,$sql);
                  <td><?php echo $data['id'];?> </td>
                  <td><?php echo $data['name'];?></td>
                  <td><?php echo $data['email'];?></td>
+                 <td><?php echo $data['dep_title'];?></td>
 
 
                  <td>

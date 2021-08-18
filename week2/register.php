@@ -22,6 +22,8 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
   $name  = CleanInputs($_POST['name']);
   $email = CleanInputs($_POST['email']);
   $password = $_POST['password'] ;
+  $dep_id   =  filter_var($_POST['dep_id'],FILTER_SANITIZE_NUMBER_INT);
+
 
 
 
@@ -55,6 +57,14 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
   }
 
 
+  if(!filter_var($dep_id,FILTER_VALIDATE_INT)){
+
+    $errors['dep_id'] = "Invalid Department id ";
+
+  }
+
+
+
 
     if(count($errors) > 0){
 
@@ -68,7 +78,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
       
 
    // code 
-   $sql = "insert into users (name,email,password) values ('$name','$email','$password')";
+   $sql = "insert into users (name,email,password,dep_id) values ('$name','$email','$password',$dep_id)";
 
     $op =  mysqli_query($con,$sql);
 
@@ -77,15 +87,29 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
         echo 'data Inserted';
     }else{
         echo 'Error Try Again';
-    }
+
+      // echo  mysqli_error($con);
 
 
     }
 
-    mysqli_close($con);
+
+    }
+
+   
 
 
 }
+
+
+
+
+  # Fetch departments 
+
+  $sql = "select * from departments";
+  $op  = mysqli_query($con,$sql); 
+
+  mysqli_close($con);
 
 ?>
 
@@ -128,6 +152,26 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
 <label for="exampleInputPassword1">New Password</label>
 <input type="password"  name="password"  class="form-control" id="exampleInputPassword1" placeholder="Password">
 </div>
+
+
+
+
+<div class="form-group">
+<label for="exampleInputPassword1">Department</label>
+<select name="dep_id" class="form-control" >
+  <?php 
+   
+      while($rows = mysqli_fetch_assoc($op)){
+  ?>
+
+  <option value="<?php echo $rows['id'];?>">  <?php echo $rows['title'];?> </option>
+
+  <?php } ?>
+
+</select>  
+</div>
+
+
 
 
 <button type="submit" class="btn btn-primary">Submit</button>
