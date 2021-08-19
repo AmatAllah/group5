@@ -166,6 +166,61 @@ $op = mysqli_query($con,$sql);
 
 
 
+  admins (name , email , password) - types 
+
+  articales(title , content , image ,addedBy)- category 
+
+
+
+
+
+types 
+id   title  
+
+admins 
+id name email password role_id 
+
+
+art_category
+
+id  title 
+
+
+art 
+
+id title content image  addBy  cat_id 
+
+
+
+
+
+   
+
+admins (x,,y,z)   - name ,email,password 
+users  (a,b,c)    - name,email,password,phone,N_id,address 
+ 
+types 
+id  title 
+ 1   user  
+ 2   admin  
+ 3   a
+ 4   b
+ 5   c
+
+
+system Users  
+id  name  password   email          
+1    x    123xx      x@x.com                  
+2    root   127r     root@r.com       
+
+
+moreInfo  
+id   phone    nationalid   address   user_id 
+ 1    010xx     45454       alex      1
+
+
+
+
 
 
  -->
